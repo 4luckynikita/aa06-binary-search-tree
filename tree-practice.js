@@ -16,16 +16,15 @@ function findMaxBST(rootNode) {
   return findMaxBST(rootNode.right);
 }
 
-
 function findMinBT(rootNode) {
   // Your code here
   let minVal = rootNode.val;
   let queue = [rootNode];
-  while(queue.length){
+  while (queue.length) {
     let curr = queue.shift();
-    if(curr.val < minVal) minVal = curr.val;
-    if(curr.left) queue.push(curr.left);
-    if(curr.right) queue.push(curr.right);
+    if (curr.val < minVal) minVal = curr.val;
+    if (curr.left) queue.push(curr.left);
+    if (curr.right) queue.push(curr.right);
   }
   return minVal;
 }
@@ -34,17 +33,53 @@ function findMaxBT(rootNode) {
   // Your code here
   let maxVal = rootNode.val;
   let queue = [rootNode];
-  while(queue.length){
+  while (queue.length) {
     let curr = queue.shift();
-    if(curr.val > maxVal) maxVal = curr.val;
-    if(curr.left) queue.push(curr.left);
-    if(curr.right) queue.push(curr.right);
+    if (curr.val > maxVal) maxVal = curr.val;
+    if (curr.left) queue.push(curr.left);
+    if (curr.right) queue.push(curr.right);
   }
   return maxVal;
 }
 
 function getHeight(rootNode) {
   // Your code here
+  if (rootNode === null) return -1;
+  let maxDepth = 0;
+  let queue = [[rootNode, 0]];
+
+  while (queue.length) {
+    let curr = queue.shift();
+    if (curr[1] > maxDepth) maxDepth = curr[1];
+    if (curr[0].left) queue.push([curr[0].left, curr[1] + 1]);
+    if (curr[0].right) queue.push([curr[0].right, curr[1] + 1]);
+  }
+  return maxDepth;
+
+  // if (!rootNode) return -1;
+
+  // rootNode.level = 0;
+  // let height = 0;
+
+  // const queue = [rootNode];
+
+  // while (queue.length) {
+  //   const curr = queue.shift();
+
+  //   height = Math.max(height, curr.level);
+
+  //   if (curr.left) {
+  //     curr.left.level = curr.level + 1;
+  //     queue.push(curr.left);
+  //   }
+
+  //   if (curr.right) {
+  //     curr.right.level = curr.level + 1;
+  //     queue.push(curr.right);
+  //   }
+  // }
+
+  // return height;
 }
 
 function balancedTree(rootNode) {
