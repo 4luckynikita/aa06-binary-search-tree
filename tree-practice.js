@@ -19,10 +19,28 @@ function findMaxBST(rootNode) {
 
 function findMinBT(rootNode) {
   // Your code here
+  let minVal = rootNode.val;
+  let queue = [rootNode];
+  while(queue.length){
+    let curr = queue.shift();
+    if(curr.val < minVal) minVal = curr.val;
+    if(curr.left) queue.push(curr.left);
+    if(curr.right) queue.push(curr.right);
+  }
+  return minVal;
 }
 
 function findMaxBT(rootNode) {
   // Your code here
+  let maxVal = rootNode.val;
+  let queue = [rootNode];
+  while(queue.length){
+    let curr = queue.shift();
+    if(curr.val > maxVal) maxVal = curr.val;
+    if(curr.left) queue.push(curr.left);
+    if(curr.right) queue.push(curr.right);
+  }
+  return maxVal;
 }
 
 function getHeight(rootNode) {
