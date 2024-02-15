@@ -112,7 +112,18 @@ function balancedTree(rootNode) {
 
 function countNodes(rootNode) {
   // Your code here
+  let counter = 0;
+  let queue = [rootNode];
+  while (queue.length) {
+    let curr = queue.shift();
+    counter++;
+    if (curr.left) queue.push(curr.left);
+    if (curr.right) queue.push(curr.right);
+  }
+  return counter;
 }
+
+
 
 function getParentNode(rootNode, target) {
   // Your code here
