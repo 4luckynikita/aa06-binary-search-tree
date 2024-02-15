@@ -1,4 +1,14 @@
 const { BinarySearchTree, TreeNode } = require("./binary-search-tree.js");
+function inOrderTraversal(currentNode, nodes = []) {
+  // Your code here
+  if (!currentNode) return nodes;
+
+  inOrderTraversal(currentNode.left, nodes);
+  nodes.push(currentNode.val);
+  inOrderTraversal(currentNode.right, nodes);
+  return nodes;
+}
+
 // Before starting, copy and paste your guided practice work into the copy
 // of `binary-search-tree.js` in this folder
 
@@ -127,10 +137,26 @@ function countNodes(rootNode) {
 
 function getParentNode(rootNode, target) {
   // Your code here
+  if(rootNode.val === target) return null;
+  let queue = [rootNode];
+  while (queue.length) {
+    let curr = queue.shift();
+
+    if (curr.left) {
+      if(curr.left.val === target)return curr;
+      queue.push(curr.left);
+    }
+    if (curr.right) {
+      if(curr.right.val === target)return curr;
+      queue.push(curr.right);
+    }
+  }
 }
 
 function inOrderPredecessor(rootNode, target) {
   // Your code here
+  let nodes = inOrderTraversal(rootNode);
+  return nodes[0] === target? null:nodes.splice(nodes.indexOf(target)-1, 1)[0]
 }
 
 function deleteNodeBST(rootNode, target) {
